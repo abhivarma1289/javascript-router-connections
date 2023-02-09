@@ -4,8 +4,10 @@ const express=require('express');
 const http=require('http');
 const morgan=require('morgan');
 const bodyParser=require('body-parser');
+const dishRouter = require('./Routers/dishRoter');
+const promoRouter =require('./Routers/promoRouter');
+const leaderRouter=require('./Routers/leaderRouter');
 
-const dishRouter= require('./Routers/dishRoter');
 const hostname='localhost';
 const port=3000;
 
@@ -14,7 +16,13 @@ app.use(morgan('dev'));
 app.use(express.static(__dirname+'/public'));
 app.use(bodyParser.json());
 
+
 app.use('/dishes',dishRouter);
+app.use('/promotions',promoRouter);
+app.use('/leaders',leaderRouter);
+
+
+
 app.use((req,res,next)=>{
     res.statusCode=200;
     res.setHeader('Content-Type','text/html');
